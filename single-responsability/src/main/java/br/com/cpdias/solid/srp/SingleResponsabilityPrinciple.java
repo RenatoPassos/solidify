@@ -10,39 +10,72 @@ public class SingleResponsabilityPrinciple {
     private static final Logger LOGGER = LoggerFactory.getLogger(SingleResponsabilityPrinciple.class);
     
     public static void main(String[] args) {
+        LOGGER.info("Executando programa...");
+        
+        SingleResponsabilityPrinciple srp = new SingleResponsabilityPrinciple();
+        srp.program();
+        
+        LOGGER.info("Programa finalizado com sucesso!");
+        
+    }
+    
+    public void program() {
+        System.out.println("Welcome to the Application!");
+        
+        // capturamos os valores
+        ParDeNumeros parDeNumeros = FormParDeNumeros.process();
+            
+        // Avaliamos se os números são válidos
+        if(!parDeNumeros.estaValido()) {
+            System.out.println("One of the input is invalid...");
+            return;
+        }
+        
+        int firstInteger = Integer.valueOf(parDeNumeros.getPrimeiro());
+        int secondInteger = Integer.valueOf(parDeNumeros.getSegundo());
+        
+        int result = firstInteger +  secondInteger;
+        
+        System.out.println("The result is: " + result);
+        System.out.println("End of the application!");
+    }
+    
+}
+class ParDeNumeros {
+
+    private String primeiro;
+    private String segundo;
+    
+    public ParDeNumeros(String primeiraEntrada, String segundaEntrada) {
+        this.primeiro = primeiraEntrada;
+        this.segundo = segundaEntrada;
+    }
+    public String getPrimeiro() {
+        return primeiro;
+    }
+    public String getSegundo() {
+        return segundo;
+    }
+
+    public boolean estaValido() {
+        return StringUtils.isNumeric(primeiro) && StringUtils.isNumeric(segundo);
+    }
+}
+class FormParDeNumeros {
+
+    public static ParDeNumeros process() {
         Scanner scanner = new Scanner(System.in);
+     
+        System.out.println("Enter the first number: ");
+        String firstNumber = scanner.nextLine();
+    
+        System.out.println("Enter the second number: ");
+        String secondNumber = scanner.nextLine();
         
-        System.out.println("Entre com o primeiro número :");
-        String primeiraEntrada = scanner.nextLine();
-        
-        System.out.println("Entre com o segundo número : ");
-        String segundaEntrada = scanner.nextLine();
+        ParDeNumeros pair = new ParDeNumeros(firstNumber, secondNumber);
         
         scanner.close();
         
-        int primeiroNumero = 0;
-        int segundoNumero = 0;
-        
-        if (!StringUtils.isNumeric(primeiraEntrada)){
-           System.out.println("O primeiro Número não é válido");
-           return;
-        }
-        
-        if (!StringUtils.isNumeric(segundaEntrada)){
-            System.out.println("O segundo Número não é válido");
-            return;
-        }
-        LOGGER.info("fINALIZANDO ");
-        
-        primeiroNumero = Integer.parseInt(primeiraEntrada);
-        segundoNumero = Integer.parseInt(segundaEntrada);
-        
-        int resultado = primeiroNumero + segundoNumero;
-        System.out.println(String.format("O resultado da soma é %d", resultado));
-        
-        System.out.println("Fim da aplicação");
-        
-        
-        
+        return pair;
     }
 }
