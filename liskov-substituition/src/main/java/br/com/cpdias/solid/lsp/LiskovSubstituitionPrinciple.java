@@ -7,16 +7,29 @@ public class LiskovSubstituitionPrinciple {
     private static final Logger LOGGER = LoggerFactory.getLogger(LiskovSubstituitionPrinciple.class);
     
     public static void main(String[] args) {
+        LOGGER.info("Iniciando Uso do Veículo.");
+        Veiculo veiculo = new Veiculo("Toyota", 3);
         
-        Veiculo v = new CarroaGasolina("Toyota", 3);
+        veiculo.acelera();
+        veiculo.desacelera();
+        veiculo.abastece();
         
-        v.speedUp();
-        v.slowDown();
+        LOGGER.info("Trocando Uso do Veículo Por um carro a gasolina.");
+        Veiculo veiculo2 = new CarroaGasolina("Ford", 4);
         
+        veiculo2.acelera();
+        veiculo2.desacelera();
+        veiculo2.abastece();
         
+        LOGGER.info("Trocando Uso do Veículo Por um carro elétrico.");
+        Veiculo veiculo3 = new CarroEletrico("Tesla", 5);
+        
+        veiculo3.acelera();
+        veiculo3.desacelera();
+        veiculo3.abastece();
     }
 }
-abstract class Veiculo  {
+class Veiculo  {
 
     protected String tipo;
     protected int idade;
@@ -26,12 +39,15 @@ abstract class Veiculo  {
         this.idade = age;
     }
     
-    protected void speedUp() {
-        System.out.println("Vehicle is speeding up...");
+    protected void acelera() {
+        System.out.println("O veículo está acelerando...");
     }
     
-    protected void slowDown() {
-        System.out.println("Vehicle is slowing down...");
+    protected void desacelera() {
+        System.out.println("O veículo está desacelerando......");
+    }
+    protected void abastece() {
+        System.out.println("O veículo está abastecendo......");
     }
 }
 class CarroaGasolina extends Veiculo {
@@ -39,18 +55,18 @@ class CarroaGasolina extends Veiculo {
     public CarroaGasolina(String type, int age) {
         super(type, age);
     }
-
     @Override
-    protected void speedUp() {
-        System.out.println("Car is speeding up...");
+    protected void acelera() {
+        System.out.println("O Carro a Gasolina está acelerando...");
     }
-    
     @Override
-    protected void slowDown() {
-        System.out.println("Car is slowing down...");
+    protected void desacelera() {
+        System.out.println("O Carro a Gasolina está desacelerando......");
     }
-    
-  
+    @Override
+    protected void abastece() {
+        System.out.println("O Carro a Gasolina está abastecendo......");
+    }
 }
 
 class CarroEletrico extends Veiculo {
@@ -58,16 +74,23 @@ class CarroEletrico extends Veiculo {
     public CarroEletrico(String type, int age) {
         super(type, age);
     }
-
     @Override
-    protected void speedUp() {
-        System.out.println("Electric car is speeding up...");
+    protected void acelera() {
+        System.out.println("O Carro Elétrico está acelerando...");
     }
     
     @Override
-    protected void slowDown() {
-        System.out.println("Electric car is slowing down...");
+    protected void desacelera() {
+        System.out.println("O Carro Elétrico está desacelerando......");
     }
     
-  
+    /*@Override
+    protected void abastece() {
+        System.out.println("O Carro Elétrico está abastecendo......");
+    }*/
+    
+    @Override
+    protected void abastece() {
+        throw new Error("Carros Elétricos não podem ser abastecidos!!!!");
+    }
 }
