@@ -8,11 +8,11 @@ public class LiskovSubstituitionPrinciple {
     
     public static void main(String[] args) {
         LOGGER.info("Iniciando Uso do Veículo.");
-        Veiculo veiculo = new Veiculo("Toyota", 3);
+       /* Veiculo veiculo = new Veiculo("Toyota", 3);
         
         veiculo.acelera();
         veiculo.desacelera();
-        veiculo.abastece();
+        veiculo.abastece();*/
         
         LOGGER.info("Trocando Uso do Veículo Por um carro a gasolina.");
         Veiculo veiculo2 = new CarroaGasolina("Ford", 4);
@@ -29,7 +29,10 @@ public class LiskovSubstituitionPrinciple {
         veiculo3.abastece();
     }
 }
-class Veiculo  {
+interface Energia{
+    void abastece();
+}
+abstract class Veiculo implements Energia  {
 
     protected String tipo;
     protected int idade;
@@ -46,7 +49,8 @@ class Veiculo  {
     protected void desacelera() {
         System.out.println("O veículo está desacelerando......");
     }
-    protected void abastece() {
+    @Override
+    public void abastece() {
         System.out.println("O veículo está abastecendo......");
     }
 }
@@ -64,7 +68,7 @@ class CarroaGasolina extends Veiculo {
         System.out.println("O Carro a Gasolina está desacelerando......");
     }
     @Override
-    protected void abastece() {
+    public void abastece() {
         System.out.println("O Carro a Gasolina está abastecendo......");
     }
 }
@@ -81,7 +85,7 @@ class CarroEletrico extends Veiculo {
     
     @Override
     protected void desacelera() {
-        System.out.println("O Carro Elétrico está desacelerando......");
+        System.out.println("O Carro Elétrico está desacelerando.....");
     }
     
     /*@Override
@@ -90,7 +94,7 @@ class CarroEletrico extends Veiculo {
     }*/
     
     @Override
-    protected void abastece() {
-        throw new Error("Carros Elétricos não podem ser abastecidos!!!!");
+    public void abastece() {
+        System.out.println("O Carro Elétrico está carregando a bateria...");
     }
 }
