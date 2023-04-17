@@ -8,11 +8,11 @@ public class LiskovSubstituitionPrinciple {
     
     public static void main(String[] args) {
         LOGGER.info("Iniciando Uso do Veículo.");
-        Veiculo veiculo = new Veiculo("Toyota", 3);
+        /*Veiculo veiculo = new Veiculo("Toyota", 3);
         
         veiculo.acelera();
         veiculo.desacelera();
-        veiculo.abastece();
+        veiculo.abastece();*/
         
         LOGGER.info("Trocando Uso do Veículo Por um carro a gasolina.");
         Veiculo veiculo2 = new CarroaGasolina("Ford", 4);
@@ -29,7 +29,7 @@ public class LiskovSubstituitionPrinciple {
         veiculo3.abastece();
     }
 }
-class Veiculo  {
+abstract class Veiculo  {
 
     protected String tipo;
     protected int idade;
@@ -46,9 +46,8 @@ class Veiculo  {
     protected void desacelera() {
         System.out.println("O veículo está desacelerando......");
     }
-    protected void abastece() {
-        System.out.println("O veículo está abastecendo......");
-    }
+    protected abstract void abastece();
+        
 }
 class CarroaGasolina extends Veiculo {
 
@@ -91,6 +90,6 @@ class CarroEletrico extends Veiculo {
     
     @Override
     protected void abastece() {
-        throw new Error("Carros Elétricos não podem ser abastecidos!!!!");
+        System.out.println("O Carro Elétrico está sendo carregando a bateria......");
     }
 }
