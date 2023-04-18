@@ -7,20 +7,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 interface Pagamento{
-	void iniciarPagamentos();
+	
     Object situacao();
     List<Object> pagamentos(); 
     
-    // A medida que o tempo passa...
-    void  iniciarPagamentoDeEmprestimo();
-    void  iniciarReembolso();
 }
-class PagamentoBancario implements Pagamento {
 
-	@Override
-	public void iniciarPagamentos() {
-		System.out.println("Zerando todos os pagamentos...");
-	}
+interface Banco extends Pagamento {
+	void iniciarPagamentos();
+}
+
+interface Emprestimo extends Pagamento {
+	void  iniciarPagamentoDeEmprestimo();
+	void  iniciarReembolso();
+}
+
+class PagamentoBancario implements Pagamento {
 	@Override
 	public Object situacao() {
 		return true;
@@ -29,32 +31,38 @@ class PagamentoBancario implements Pagamento {
 	public List<Object> pagamentos() {
 		return Collections.emptyList();
 	}
+}
+class PagamentoDeEmprestimo implements Emprestimo {
 
+	@Override
+	public Object situacao() {
+		return true;
+	}
+
+	@Override
+	public List<Object> pagamentos() {
+		return Collections.emptyList();
+	}
 	@Override
 	public void iniciarPagamentoDeEmprestimo() {
-		throw new UnsupportedOperationException("Não sei como Fazer um pagamento de empréstimo.");
+		System.out.println("Preparando carga de pagamentos de empréstimos.");
+		
 	}
-
 	@Override
 	public void iniciarReembolso() {
-		throw new UnsupportedOperationException("Não sei como Fazer um Reembolso.");
+		System.out.println("Preparando Reembolso.");
+		
 	}
-	
 }
-
-
 public class InterfaceSegregationPrinciple {
     private static final Logger LOGGER = LoggerFactory.getLogger(InterfaceSegregationPrinciple.class);
     
     public static void main(String[] args) {
         LOGGER.info("Executando programa...");
-        Pagamento pagamento = new PagamentoBancario();
+        PagamentoDeEmprestimo pagamento = new PagamentoDeEmprestimo();
         pagamento.iniciarPagamentoDeEmprestimo();
         LOGGER.info("Programa finalizado com sucesso!");
         
     }
-    
-    
-    
 }
 
