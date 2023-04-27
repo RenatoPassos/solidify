@@ -1,5 +1,5 @@
 ## O - Open/Closed Principle
-![Martelo e chave juntos](imagens/single-responsibility-principle.png)
+![Martelo e chave juntos](https://accesto.com/blog/static/8402cfe5dfc356a6db99e6593e4b1e13/fd28b/interface-segregation-principle.png)
 
  - Nenhum cliente deve ser forçado a depender de métodos que não usa
  - Não é bom se uma interface tem um grande número de métodos. Devemos separar os métodos em conformidade
