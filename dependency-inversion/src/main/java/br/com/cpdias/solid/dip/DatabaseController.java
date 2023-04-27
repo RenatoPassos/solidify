@@ -4,12 +4,17 @@ package br.com.cpdias.solid.dip;
 public class DatabaseController {
 
 	// we program to an interface - so we can achieve loosely coupled architecture
-	private MySQLDatabase database;
+	private Database database;
 	
-	public DatabaseController() {
-		this.database = new MySQLDatabase();
-		this.database.connect();
-		this.database.disconnect();
+	public DatabaseController(Database database) {
+		this.database = database;
 	}
 	
+	public void connect() {
+		this.database.connect();
+	}
+	
+	public void disconnect() {
+		this.database.disconnect();
+	}
 }
