@@ -14,6 +14,4 @@ Um artefato qualquer deve estar fechado para alteração mas aberto para extens�
 
 Fonte: https://www.udemy.com/course/basics-of-software-architecture-design-in-java/learn/lecture/9592570#overview
 
-
- pix, cartao de crédito, débito, cheque, dinheiro
  
